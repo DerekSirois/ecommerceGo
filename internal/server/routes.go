@@ -8,4 +8,6 @@ import (
 
 func initRoutes(e *echo.Echo) {
 	e.GET("/", handler.Index)
+	e.GET("/register", handler.RegisterPage)
+	e.GET("/login", handler.LoginPage)
 }
