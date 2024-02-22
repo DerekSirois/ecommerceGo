@@ -19,6 +19,7 @@ func InitDb() {
 		db, err := sqlx.Connect("postgres", dsn)
 		if err == nil && db != nil {
 			Db = db
+			Db.MustExec(schema)
 			log.Println("Connected to the database")
 			return
 		}
