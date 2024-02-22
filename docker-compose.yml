@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  ecommerce:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      DSN: "host=postgres port=5432 user=dev password=abcde dbname=ecommerceGo sslmode=disable timezone=UTC connect_timeout=5"
+  
+  postgres:
+    image: "postgres:16.1"
+    ports:
+      - "5432:5432"
+    deploy:
+      mode: replicated
+      replicas: 1
+    environment:
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: abcde
+      POSTGRES_DB: ecommerceGo
+    volumes:
+      - ./db-data/:/var/lib/postgresql/data/
